@@ -2,26 +2,21 @@ name: server ci
 on:
   push:
     branches:
-    - master
     - dev
     - release/*
   pull_request:
     branches:
-    - master
     - dev
 
 jobs:
   build:
+    name: server build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go: [ '1.18', '1.13' ]
-    name: Go ${{ matrix.go }} sample
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
         with:
           go-version: '1.18.3'
       - run: |
-          @go version
-          @make
+          go version
+          make
